@@ -34,10 +34,8 @@ public:
 
 public:
   frc::SwerveModulePosition GetPosition();
-  // double GetDrivePosition();
   units::unit_t<units::velocity::meters_per_second, double, units::linear_scale> GetDriveVelocity();
-  // units::angle::radian_t GetTurnPosition();
-  double GetTurnVelocity();
+  units::radians_per_second_t GetTurnVelocity();
   double GetAbsoluteEncoderPosition();
   void ResetEncoders();
   frc::SwerveModuleState GetState();
