@@ -123,5 +123,5 @@ namespace AutoConstants
     inline constexpr double kPThetaController = 3;
 
     inline auto kThetaControllerConstraints = frc::TrapezoidProfile<units::radians>::Constraints(kMaxAngularSpeedRadiansPerSecond, kMaxAngularAccelerationRadiansPerSecondSquared);
-    
+
 } // namespace AutoConstants

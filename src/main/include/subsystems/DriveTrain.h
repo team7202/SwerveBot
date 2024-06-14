@@ -44,5 +44,5 @@ public:
   void ResetOdometry(frc::Pose2d pose);
   void StopModules();
   void SetModuleStates(wpi::array<frc::SwerveModuleState, 4> desiredStates);
-  void Drive(frc::ChassisSpeeds& chassisSpeeds);
+  void Drive(frc::ChassisSpeeds &chassisSpeeds);
 };

@@ -11,11 +11,11 @@
 
 #include <functional>
 
-
 class SwerveJoystickCommand
-    : public frc2::CommandHelper<frc2::Command, SwerveJoystickCommand> {
+    : public frc2::CommandHelper<frc2::Command, SwerveJoystickCommand>
+{
 public:
-    SwerveJoystickCommand(DriveTrain* driveTrain, std::function<double(void)> xSpeedFunction, std::function<double(void)> ySpeedFunction, std::function<double(void)> turnSpeedFunction, std::function<bool(void)> fieldOrientedFunction);
+    SwerveJoystickCommand(DriveTrain *driveTrain, std::function<double(void)> xSpeedFunction, std::function<double(void)> ySpeedFunction, std::function<double(void)> turnSpeedFunction, std::function<bool(void)> fieldOrientedFunction);
 
     void Initialize() override;
 
@@ -26,7 +26,7 @@ public:
     bool IsFinished() override;
 
 private:
-    DriveTrain* driveTrain;
+    DriveTrain *driveTrain;
     std::function<double(void)> xSpeedFunction, ySpeedFunction;
     std::function<double(void)> turnSpeedFunction;
     std::function<bool(void)> fieldOrientedFunction;
