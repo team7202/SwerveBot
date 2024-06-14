@@ -39,9 +39,10 @@ namespace OIConstants
 
 namespace ModuleConstants
 {
+    // https://www.swervedrivespecialties.com/products/mk4i-swerve-module
     inline constexpr units::meter_t kWheelDiameterMeters = 4_in;
-    inline constexpr double kDriveMotorGearRatio = 1 / 5.8462;
-    inline constexpr double kTurnMotorGearRatio = 1 / 18.0;
+    inline constexpr double kDriveMotorGearRatio = 1 / 6.12;
+    inline constexpr double kTurnMotorGearRatio = 7.0 / 150.0;
     inline constexpr units::meter_t kDriveEncoderRot2Meter = units::meter_t(kDriveMotorGearRatio * std::numbers::pi * kWheelDiameterMeters.value());
     inline constexpr units::radian_t kTurnEncoderRot2Rad = units::radian_t(kTurnMotorGearRatio * 2 * std::numbers::pi);
     inline constexpr units::meters_per_second_t kDriveEncoderRPM2MeterPerSec = units::meters_per_second_t(kDriveEncoderRot2Meter.value() / 60);
@@ -59,9 +60,9 @@ namespace DriveConstants
 
     inline frc::SwerveDriveKinematics kDriveKinematics(
         frc::Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-        frc::Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-        frc::Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-        frc::Translation2d(kWheelBase / 2, -kTrackWidth / 2));
+        frc::Translation2d(kWheelBase / 2, kTrackWidth / 2),
+        frc::Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
+        frc::Translation2d(-kWheelBase / 2, kTrackWidth / 2));
 
     inline constexpr int kGyroPort = 0;
 
@@ -100,13 +101,13 @@ namespace DriveConstants
     inline constexpr double kFrontRightDriveAbsoluteEncoderOffset = -0;
     inline constexpr double kBackRightDriveAbsoluteEncoderOffset = -0;
 
-    inline constexpr units::meters_per_second_t kPhysicalMaxSpeedMetersPerSecond = 5_mps;
+    inline constexpr units::meters_per_second_t kPhysicalMaxSpeedMetersPerSecond = 16.6_fps;
     inline constexpr units::radians_per_second_t kPhysicalMaxAngularSpeedRadiansPerSecond = units::radians_per_second_t(4.0 * std::numbers::pi);
 
     inline constexpr units::meters_per_second_t kTeleDriveMaxSpeedMetersPerSecond = units::meters_per_second_t(kPhysicalMaxSpeedMetersPerSecond.value() / 4);
     inline constexpr units::radians_per_second_t kTeleDriveMaxAngularSpeedRadiansPerSecond = units::radians_per_second_t(kPhysicalMaxAngularSpeedRadiansPerSecond.value() / 4);
 
-    inline constexpr units::meters_per_second_t kTeleDriveMaxAccelerationUnitsPerSecond = 3_mps;
+    inline constexpr units::meters_per_second_t kTeleDriveMaxAccelerationUnitsPerSecond = 12.45_fps;
     inline constexpr units::radians_per_second_t kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3.0_rad_per_s;
 
 } // namespace DriveConstants
