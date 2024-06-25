@@ -19,7 +19,7 @@
 SwerveModule::SwerveModule(int driveMotorId, int turnMotorId, bool driveMotorReversed, bool turnMotorReversed, int absoluteEncoderId, double absoluteEncoderOffset, bool absoluteEncoderReversed)
     : absoluteEncoder(ctre::phoenix6::hardware::CANcoder(absoluteEncoderId)),
       driveMotor(rev::CANSparkMax(driveMotorId, rev::CANSparkLowLevel::MotorType::kBrushless)),
-      turnMotor(rev::CANSparkMax(driveMotorId, rev::CANSparkLowLevel::MotorType::kBrushless)),
+      turnMotor(rev::CANSparkMax(turnMotorId, rev::CANSparkLowLevel::MotorType::kBrushless)),
       driveEncoder(driveMotor.GetEncoder()),
       turnEncoder(turnMotor.GetEncoder()),
       turnPID(ModuleConstants::kPTurn, 0.0, 0.0)

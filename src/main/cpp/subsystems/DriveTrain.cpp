@@ -2,6 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+#include <cmath>
 #include "subsystems/DriveTrain.h"
 
 /**
@@ -67,7 +68,7 @@ void DriveTrain::ZeroHeading()
  */
 units::angle::degree_t DriveTrain::GetHeading()
 {
-    return units::angle::degree_t(std::remainder(gyro.GetAngle(), 360));
+    return units::angle::degree_t(std::remainder(gyro.GetYaw().GetValue().value(), 360));
 }
 
 /**
@@ -121,6 +122,7 @@ void DriveTrain::StopModules()
 void DriveTrain::SetModuleStates(wpi::array<frc::SwerveModuleState, 4> desiredStates)
 {
     DriveConstants::kDriveKinematics.DesaturateWheelSpeeds(&desiredStates, DriveConstants::kPhysicalMaxSpeedMetersPerSecond);
+
     frontLeft.SetDesiredState(desiredStates[0]);
     frontRight.SetDesiredState(desiredStates[1]);
     backLeft.SetDesiredState(desiredStates[2]);

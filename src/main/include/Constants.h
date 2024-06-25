@@ -29,7 +29,7 @@
 namespace OIConstants
 {
     inline constexpr int kDriverControllerPort = 0;
-    inline constexpr double kDeadband = 0.02;
+    inline constexpr double kDeadband = 0.1;
     inline constexpr int kDriverYAxis = 1;
     inline constexpr int kDriverXAxis = 0;
     inline constexpr int kDriverRotAxis = 4;
@@ -54,9 +54,9 @@ namespace ModuleConstants
 namespace DriveConstants
 {
     // Distance between right and left wheels
-    inline constexpr units::meter_t kTrackWidth = 0_in;
+    inline constexpr units::meter_t kTrackWidth = 18.5_in;
     // Distance between front and back wheels
-    inline constexpr units::meter_t kWheelBase = 0_in;
+    inline constexpr units::meter_t kWheelBase = 24_in;
 
     inline frc::SwerveDriveKinematics kDriveKinematics(
         frc::Translation2d(kWheelBase / 2, -kTrackWidth / 2),
@@ -64,42 +64,43 @@ namespace DriveConstants
         frc::Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
         frc::Translation2d(-kWheelBase / 2, kTrackWidth / 2));
 
-    inline constexpr int kGyroPort = 0;
+    inline constexpr int kGyroPort = 62;
 
-    inline constexpr int kFrontLeftDriveMotorPort = 0;
-    inline constexpr int kBackLeftDriveMotorPort = 0;
-    inline constexpr int kFrontRightDriveMotorPort = 0;
-    inline constexpr int kBackRightDriveMotorPort = 0;
+    inline constexpr int kFrontLeftDriveMotorPort = 13;
+    inline constexpr int kBackLeftDriveMotorPort = 1;
+    inline constexpr int kFrontRightDriveMotorPort = 10;
+    inline constexpr int kBackRightDriveMotorPort = 9;
 
-    inline constexpr int kFrontLeftTurnMotorPort = 0;
-    inline constexpr int kBackLeftTurnMotorPort = 0;
-    inline constexpr int kFrontRightTurnMotorPort = 0;
-    inline constexpr int kBackRightTurnMotorPort = 0;
+    inline constexpr int kFrontLeftTurnMotorPort = 12;    
+    inline constexpr int kBackLeftTurnMotorPort = 2;
+    inline constexpr int kFrontRightTurnMotorPort = 11;
+    inline constexpr int kBackRightTurnMotorPort = 8;
 
-    inline constexpr bool kFrontLeftTurnEncoderReversed = true;
-    inline constexpr bool kBackLeftTurnEncoderReversed = true;
-    inline constexpr bool kFrontRightTurnEncoderReversed = true;
-    inline constexpr bool kBackRightTurnEncoderReversed = true;
+    inline constexpr bool kFrontLeftTurnEncoderReversed = false;
+    inline constexpr bool kBackLeftTurnEncoderReversed = false;
+    inline constexpr bool kFrontRightTurnEncoderReversed = false;
+    inline constexpr bool kBackRightTurnEncoderReversed = false;
 
-    inline constexpr bool kFrontLeftDriveEncoderReversed = true;
+    inline constexpr bool kFrontLeftDriveEncoderReversed = false;
     inline constexpr bool kBackLeftDriveEncoderReversed = true;
-    inline constexpr bool kFrontRightDriveEncoderReversed = false;
+    inline constexpr bool kFrontRightDriveEncoderReversed = true;
     inline constexpr bool kBackRightDriveEncoderReversed = false;
 
-    inline constexpr int kFrontLeftDriveAbsoluteEncoderPort = 0;
-    inline constexpr int kBackLeftDriveAbsoluteEncoderPort = 0;
-    inline constexpr int kFrontRightDriveAbsoluteEncoderPort = 0;
-    inline constexpr int kBackRightDriveAbsoluteEncoderPort = 0;
+    inline constexpr int kFrontLeftDriveAbsoluteEncoderPort = 29;
+    inline constexpr int kBackLeftDriveAbsoluteEncoderPort = 25;
+    inline constexpr int kFrontRightDriveAbsoluteEncoderPort = 27;
+    inline constexpr int kBackRightDriveAbsoluteEncoderPort = 26;
 
-    inline constexpr bool kFrontLeftDriveAbsoluteEncoderReversed = false;
-    inline constexpr bool kBackLeftDriveAbsoluteEncoderReversed = false;
-    inline constexpr bool kFrontRightDriveAbsoluteEncoderReversed = false;
-    inline constexpr bool kBackRightDriveAbsoluteEncoderReversed = false;
+    inline constexpr bool kFrontLeftDriveAbsoluteEncoderReversed = true;
+    inline constexpr bool kBackLeftDriveAbsoluteEncoderReversed = true;
+    inline constexpr bool kFrontRightDriveAbsoluteEncoderReversed = true;
+    inline constexpr bool kBackRightDriveAbsoluteEncoderReversed = true;
 
-    inline constexpr double kFrontLeftDriveAbsoluteEncoderOffset = -0;
-    inline constexpr double kBackLeftDriveAbsoluteEncoderOffset = -0;
-    inline constexpr double kFrontRightDriveAbsoluteEncoderOffset = -0;
-    inline constexpr double kBackRightDriveAbsoluteEncoderOffset = -0;
+    // inline constexpr double kFrontLeftDriveAbsoluteEncoderOffset = -(278.78 * (M_PI / 180));
+    inline constexpr double kFrontLeftDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));
+    inline constexpr double kBackLeftDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));
+    inline constexpr double kFrontRightDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));
+    inline constexpr double kBackRightDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));
 
     inline constexpr units::meters_per_second_t kPhysicalMaxSpeedMetersPerSecond = 16.6_fps;
     inline constexpr units::radians_per_second_t kPhysicalMaxAngularSpeedRadiansPerSecond = units::radians_per_second_t(4.0 * std::numbers::pi);
