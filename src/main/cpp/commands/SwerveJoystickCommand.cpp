@@ -37,16 +37,11 @@ void SwerveJoystickCommand::Execute()
   auto ySpeed = (ySpeedLimit.Calculate(frc::ApplyDeadband(ySpeedFunction(), OIConstants::kDeadband)) * DriveConstants::kTeleDriveMaxSpeedMetersPerSecond);
   auto turnSpeed = (turnSpeedLimit.Calculate(frc::ApplyDeadband(turnSpeedFunction(), OIConstants::kDeadband)) * DriveConstants::kTeleDriveMaxAngularSpeedRadiansPerSecond);
 
-  frc::ChassisSpeeds chassisSpeeds;
-
   // Determine if driving is field-oriented or robot-oriented
   if (fieldOrientedFunction())
-    chassisSpeeds = frc::ChassisSpeeds::FromFieldRelativeSpeeds(xSpeed, ySpeed, turnSpeed, driveTrain->GetRotation2d());
+    driveTrain->DriveFieldRelative(frc::ChassisSpeeds(xSpeed, ySpeed, turnSpeed));
   else
-    chassisSpeeds = frc::ChassisSpeeds::FromRobotRelativeSpeeds(xSpeed, ySpeed, turnSpeed, driveTrain->GetRotation2d());
-
-  // Drive the robot with the calculated chassis speeds
-  driveTrain->Drive(chassisSpeeds);
+    driveTrain->DriveRobotRelative(frc::ChassisSpeeds(xSpeed, ySpeed, turnSpeed));
 }
 
 /**

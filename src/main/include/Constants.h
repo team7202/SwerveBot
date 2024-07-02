@@ -81,10 +81,10 @@ namespace DriveConstants
     inline constexpr bool kFrontRightTurnEncoderReversed = false;
     inline constexpr bool kBackRightTurnEncoderReversed = false;
 
-    inline constexpr bool kFrontLeftDriveEncoderReversed = false;
-    inline constexpr bool kBackLeftDriveEncoderReversed = true;
-    inline constexpr bool kFrontRightDriveEncoderReversed = true;
-    inline constexpr bool kBackRightDriveEncoderReversed = false;
+    inline constexpr bool kFrontLeftDriveEncoderReversed = true;
+    inline constexpr bool kBackLeftDriveEncoderReversed = false;
+    inline constexpr bool kFrontRightDriveEncoderReversed = false;
+    inline constexpr bool kBackRightDriveEncoderReversed = true;
 
     inline constexpr int kFrontLeftDriveAbsoluteEncoderPort = 29;
     inline constexpr int kBackLeftDriveAbsoluteEncoderPort = 25;

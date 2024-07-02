@@ -44,5 +44,15 @@ public:
   void ResetOdometry(frc::Pose2d pose);
   void StopModules();
   void SetModuleStates(wpi::array<frc::SwerveModuleState, 4> desiredStates);
-  void Drive(frc::ChassisSpeeds &chassisSpeeds);
+  void DriveRobotRelative(const frc::ChassisSpeeds &robotRelativeSpeeds);
+  
+  frc::ChassisSpeeds GetSpeeds()
+  {
+    return DriveConstants::kDriveKinematics.ToChassisSpeeds(frontLeft.GetState(), frontRight.GetState(), backLeft.GetState(), backRight.GetState());
+  }
+
+  inline void DriveFieldRelative(const frc::ChassisSpeeds &fieldRelativeSpeeds)
+  {
+    DriveRobotRelative(frc::ChassisSpeeds::FromFieldRelativeSpeeds(fieldRelativeSpeeds, GetPose2d().Rotation()));
+  }
 };

@@ -3,6 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include <cmath>
+#include <frc/DriverStation.h>
+#include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/util/HolonomicPathFollowerConfig.h>
+#include <pathplanner/lib/util/PIDConstants.h>
+#include <pathplanner/lib/util/ReplanningConfig.h>
 #include "subsystems/DriveTrain.h"
 
 /**
@@ -48,6 +53,31 @@ DriveTrain::DriveTrain()
     // Delay to ensure the gyro is ready
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     ZeroHeading();
+
+    pathplanner::AutoBuilder::configureHolonomic(
+        [this]()
+        { return GetPose2d(); },
+        [this](frc::Pose2d pose)
+        { ResetOdometry(pose); },
+        [this]()
+        { return GetSpeeds(); },
+        [this](frc::ChassisSpeeds speeds)
+        { DriveRobotRelative(speeds); },
+        pathplanner::HolonomicPathFollowerConfig(     // HolonomicPathFollowerConfig, this should likely live in your Constants class
+            pathplanner::PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+            pathplanner::PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+            4.5_mps,                                  // Max module speed, in m/s
+            0.4_m,                                    // Drive base radius in meters. Distance from robot center to furthest module.
+            pathplanner::ReplanningConfig()           // Default path replanning config. See the API for the options here
+            ),
+        []()
+        {
+            auto alliance = frc::DriverStation::GetAlliance();
+            if (alliance)
+                return alliance.value() == frc::DriverStation::Alliance::kRed;
+            return false;
+        },
+        this);
 };
 
 /**
@@ -133,9 +163,9 @@ void DriveTrain::SetModuleStates(wpi::array<frc::SwerveModuleState, 4> desiredSt
  * Drives the robot using the specified chassis speeds.
  * @param chassisSpeeds The desired chassis speeds.
  */
-void DriveTrain::Drive(frc::ChassisSpeeds &chassisSpeeds)
+void DriveTrain::DriveRobotRelative(const frc::ChassisSpeeds &robotRelativeSpeeds)
 {
-    SetModuleStates(DriveConstants::kDriveKinematics.ToSwerveModuleStates(chassisSpeeds));
+    SetModuleStates(DriveConstants::kDriveKinematics.ToSwerveModuleStates(robotRelativeSpeeds));
 }
 
 // This method will be called once per scheduler run

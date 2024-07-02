@@ -42,49 +42,5 @@ void RobotContainer::ConfigureBindings()
  */
 frc2::CommandPtr RobotContainer::GetAutonomousCommand()
 {
-  // Configure the trajectory for autonomous movement
-  frc::TrajectoryConfig trajectoryConfig(AutoConstants::kMaxSpeedMetersPerSecond, AutoConstants::kMaxAccelerationMetersPerSecondSquared);
-  trajectoryConfig.SetKinematics(DriveConstants::kDriveKinematics);
-
-  frc::Trajectory trajectory = frc::TrajectoryGenerator::GenerateTrajectory(
-      frc::Pose2d(0_m, 0_m, 0_deg),                                  // Start pose
-      {frc::Translation2d(1_m, 0_m), frc::Translation2d(1_m, -1_m)}, // Waypoints
-      frc::Pose2d(2_m, -1_m, 180_deg),                               // End Pose
-      trajectoryConfig);
-
-  // Configure PID controllers for position and heading control
-  frc::PIDController xController(AutoConstants::kPXController, 0, 0);
-  frc::PIDController yController(AutoConstants::kPYController, 0, 0);
-  frc::ProfiledPIDController<units::radians> thetaController(AutoConstants::kPThetaController, 0.0, 0.0, AutoConstants::kThetaControllerConstraints);
-
-  thetaController.EnableContinuousInput(-units::radian_t(std::numbers::pi), units::radian_t(std::numbers::pi));
-
-  // Create the swerve controller command to follow the trajectory
-  frc2::CommandPtr swerveControllerCommand = frc2::SwerveControllerCommand<4>(
-                                                 trajectory,
-                                                 [this]()
-                                                 { return m_driveTrain.GetPose2d(); },
-                                                 DriveConstants::kDriveKinematics,
-                                                 xController,
-                                                 yController,
-                                                 thetaController,
-                                                 [this](auto states)
-                                                 { m_driveTrain.SetModuleStates(states); },
-                                                 {&m_driveTrain})
-                                                 .ToPtr();
-
-  // Return a sequence of commands for autonomous execution
-  return frc2::cmd::Sequence(
-      // Reset odometry to the initial pose of the trajectory
-      frc2::InstantCommand([this, initialPose = trajectory.InitialPose()]()
-                           { m_driveTrain.ResetOdometry(initialPose); },
-                           {&m_driveTrain})
-          .ToPtr(),
-      // Execute the swerve controller command for trajectory following
-      std::move(swerveControllerCommand),
-      // Stop all modules after the trajectory is complete
-      frc2::InstantCommand([this]()
-                           { m_driveTrain.StopModules(); },
-                           {&m_driveTrain})
-          .ToPtr());
+  return pathplanner::PathPlannerAuto("Example Auto").ToPtr();
 }
