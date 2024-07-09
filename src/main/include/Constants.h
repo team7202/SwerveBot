@@ -97,6 +97,9 @@ namespace DriveConstants
     inline constexpr bool kBackRightDriveAbsoluteEncoderReversed = true;
 
     // inline constexpr double kFrontLeftDriveAbsoluteEncoderOffset = -(278.78 * (M_PI / 180));
+    // inline constexpr double kBackLeftDriveAbsoluteEncoderOffset = -(219.8 * (M_PI / 180));
+    // inline constexpr double kFrontRightDriveAbsoluteEncoderOffset = -(219.8 * (M_PI / 180));
+    // inline constexpr double kBackRightDriveAbsoluteEncoderOffset = -(239.58 * (M_PI / 180));
     inline constexpr double kFrontLeftDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));
     inline constexpr double kBackLeftDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));
     inline constexpr double kFrontRightDriveAbsoluteEncoderOffset = -(0 * (M_PI / 180));

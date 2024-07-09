@@ -131,6 +131,9 @@ void SwerveModule::SetDesiredState(frc::SwerveModuleState state)
 
     // Update SmartDashboard with current module state
     frc::SmartDashboard::PutString("Swerve[" + std::to_string(absoluteEncoder.GetDeviceID()) + "] State", std::to_string(state.angle.Degrees().value()));
+
+    double angle = absoluteEncoder.GetPosition().GetValueAsDouble();
+    frc::SmartDashboard::PutNumber(std::to_string(turnMotor.GetDeviceId()), angle);
 }
 
 /**

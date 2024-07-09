@@ -98,7 +98,7 @@ void DriveTrain::ZeroHeading()
  */
 units::angle::degree_t DriveTrain::GetHeading()
 {
-    return units::angle::degree_t(std::remainder(gyro.GetYaw().GetValue().value(), 360));
+    return units::angle::degree_t(std::remainder(gyro.GetAngle(), 360));
 }
 
 /**
